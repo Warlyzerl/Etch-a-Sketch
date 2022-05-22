@@ -13,18 +13,25 @@ function createGrid (boxes) {
     addDrawFunctionality();
 }
 
+function recreateGrid(boxes) {
+    const rows = document.querySelectorAll('.row');
+    rows.forEach(row => {
+        row.remove();
+    })
+    createGrid(boxes);
+}
+
 function addDrawFunctionality () {
     const squares = document.querySelectorAll('.box');
     squares.forEach(square => {
-        
+        square.addEventListener('mousedown', fillSquareClick);
         square.addEventListener('mouseover', fillSquare);
-        
     });
 }
 
 window.addEventListener('mousedown', downListener);
-        
 window.addEventListener('mouseup', upListener);
+
 let isMouseDown;
 
 function upListener () {
@@ -36,7 +43,20 @@ function downListener () {
 }
 
 function fillSquare() {
-    if (isMouseDown == true) {
-        this.classList.toggle('color');
+    if (isMouseDown) {
+        this.classList.add('color');
     }
 }
+
+function fillSquareClick () {
+    this.classList.add('color');
+}
+
+function clearGrid () {
+    const squares = document.querySelectorAll('.box.color');
+    squares.forEach(square => {
+        square.classList.remove('color');
+    })
+}
+
+
