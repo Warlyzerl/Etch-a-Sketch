@@ -1,8 +1,8 @@
-function createGrid () {
-    for (let i = 0; i < 16; i++) {
+function createGrid (boxes) {
+    for (let i = 0; i < boxes; i++) {
         const row = document.createElement('div');
         row.classList.add('row');
-        for (let i = 0; i < 16; i++) {
+        for (let i = 0; i < boxes; i++) {
             const box = document.createElement('div');
             box.classList.add('box');
             row.appendChild(box);
@@ -12,6 +12,6 @@ function createGrid () {
     }
 }
 
-function setSize () {
-    return;
+function setSize (row, box) {
+    
 }
