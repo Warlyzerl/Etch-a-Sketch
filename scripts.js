@@ -10,8 +10,33 @@ function createGrid (boxes) {
         const container = document.getElementById('container');
         container.appendChild(row);
     }
+    addDrawFunctionality();
 }
 
-function setSize (row, box) {
-    
+function addDrawFunctionality () {
+    const squares = document.querySelectorAll('.box');
+    squares.forEach(square => {
+        
+        square.addEventListener('mouseover', fillSquare);
+        
+    });
+}
+
+window.addEventListener('mousedown', downListener);
+        
+window.addEventListener('mouseup', upListener);
+let isMouseDown;
+
+function upListener () {
+    isMouseDown = false;
+}
+
+function downListener () {
+    isMouseDown = true;
+}
+
+function fillSquare() {
+    if (isMouseDown == true) {
+        this.classList.toggle('color');
+    }
 }
