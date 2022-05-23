@@ -76,6 +76,25 @@ function fillSquareClick () {
     this.style.backgroundColor = boxColor;
 }
 
+const eraserButton = document.querySelector('.eraser');
+eraserButton.addEventListener('click', eraserToggle);
+let isOn = false;
+let tempColor;
+function eraserToggle () {
+    if (!isOn) {
+        isOn = true;
+        this.classList.add('gray');
+        tempColor = boxColor;
+        boxColor = 'white';
+    }
+    else {
+        isOn = false;
+        this.classList.remove('gray');
+        boxColor = tempColor;
+
+    }
+}
+
 
 
 
