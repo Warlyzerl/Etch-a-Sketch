@@ -1,4 +1,7 @@
-function createGrid (boxes) {
+const container = document.getElementById('container');
+let boxes = 16;
+
+function createGrid () {
     for (let i = 0; i < boxes; i++) {
         const row = document.createElement('div');
         row.classList.add('row');
@@ -7,18 +10,45 @@ function createGrid (boxes) {
             box.classList.add('box');
             row.appendChild(box);
         }
-        const container = document.getElementById('container');
         container.appendChild(row);
     }
     addDrawFunctionality();
 }
 
-function recreateGrid(boxes) {
+const recreateButton = document.querySelector('.change-size');
+recreateButton.addEventListener('click', recreateGrid);
+
+function recreateGrid() {
+    boxes = prompt("Enter the number of boxes per row/column you want. We recommend 50 or less.")
     const rows = document.querySelectorAll('.row');
     rows.forEach(row => {
         row.remove();
     })
-    createGrid(boxes);
+    createGrid();
+}
+
+const clearButton = document.querySelector('.clear');
+clearButton.addEventListener('click', clearGrid);
+
+function clearGrid () {
+    const squares = document.querySelectorAll('.box');
+    squares.forEach(square => {
+        square.style.backgroundColor = 'white';
+    })
+}
+
+
+
+let isMouseDown;
+window.addEventListener('mousedown', downListener);
+window.addEventListener('mouseup', upListener);
+
+function upListener () {
+    isMouseDown = false;
+}
+
+function downListener () {
+    isMouseDown = true;
 }
 
 function addDrawFunctionality () {
@@ -29,34 +59,26 @@ function addDrawFunctionality () {
     });
 }
 
-window.addEventListener('mousedown', downListener);
-window.addEventListener('mouseup', upListener);
-
-let isMouseDown;
-
-function upListener () {
-    isMouseDown = false;
-}
-
-function downListener () {
-    isMouseDown = true;
+let boxColor = 'black';
+const changeColor = document.querySelector('.color');
+changeColor.addEventListener('click', setColor);
+function setColor () {
+    boxColor = prompt("Enter a color you want to use like 'yellow' or 'blue'. Just don't enter something dumb like 'Seafoam Green' or 'Naruto Hair Orange'").toLowerCase();
 }
 
 function fillSquare() {
     if (isMouseDown) {
-        this.classList.add('color');
+        this.style.backgroundColor = boxColor;
     }
 }
 
 function fillSquareClick () {
-    this.classList.add('color');
+    this.style.backgroundColor = boxColor;
 }
 
-function clearGrid () {
-    const squares = document.querySelectorAll('.box.color');
-    squares.forEach(square => {
-        square.classList.remove('color');
-    })
-}
+
+
+
+
 
 
